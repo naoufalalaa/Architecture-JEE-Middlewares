@@ -6,11 +6,25 @@ This repository will treat:
 - [x] Micro Services & distrubuted systems
 - [x] Framework SPRING 
 - [x] Hibernate ORM JPA
+- [x] Jax Binding OXM JaxB
 
 > You'll find a brief repport on each activity under each.
 
-![difference-between-spring-and-hibernate_3](https://user-images.githubusercontent.com/61352259/157001036-b8d2af60-ffff-47e3-bdad-2050e11dde8a.png)
-![spring-boot-logo](https://user-images.githubusercontent.com/61352259/157001041-a30bd1b7-5ef4-4247-85c4-b8d24bcc1c5b.png)
 
+<br/>
+<br/>
+<br/>
+<br/>
+<img align="left" alt="springboot" width="100px" src="https://user-images.githubusercontent.com/61352259/158052652-94d8828e-ea00-405d-abdb-f4fcc2513576.png" />
+
+<img align="left" alt="hibernate" width="100px" src="https://user-images.githubusercontent.com/61352259/158052606-e4a8aede-c5a6-4355-9890-e88eddb66a48.png" />
+
+<img align="left" alt="Jaxb" height="50px" src="https://user-images.githubusercontent.com/61352259/158052492-f612d1ca-89ee-4dbf-8fc8-dc4bc1c96d82.png" />
+
+
+<br/>
+<br/>
+
+---
 
 ###### Please check out my Linked In account for any formal communication [LinkedIn : Naoufal ALAA](https://linkedin.com/in/naoufal-alaa)
