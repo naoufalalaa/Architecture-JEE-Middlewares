@@ -9,24 +9,16 @@ import java.io.Serializable;
 @XmlAccessorType(XmlAccessType.FIELD)
 class Dependence implements Serializable {
     @XmlAttribute
-    private String id;
-    @XmlAttribute
     private String name;
+    @XmlAttribute
+    private String ref;
 
     public Dependence() {
     }
 
     public Dependence(String id, String name) {
-        this.id = id;
-        this.name = name;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
+        this.name = id;
+        this.ref = name;
     }
 
     public String getName() {
@@ -35,5 +27,13 @@ class Dependence implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getRef() {
+        return ref;
+    }
+
+    public void setRef(String ref) {
+        this.ref = ref;
     }
 }
