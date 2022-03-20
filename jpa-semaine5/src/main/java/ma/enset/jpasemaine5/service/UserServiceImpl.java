@@ -55,7 +55,7 @@ public class UserServiceImpl implements UserService {
     public User authenticate(String username, String password) {
         User user = userRepositories.findByUsername(username);
         if(user!=null) {
-            if (user.getPassword() == password) {
+            if (user.getPassword().equals(password)) {
                 return user;
             }
         }
