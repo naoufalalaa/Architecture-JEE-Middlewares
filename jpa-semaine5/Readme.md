@@ -18,8 +18,7 @@ server.port=8086
 ```
 - execution : 
 
-<img src="https://user-images.githubusercontent.com/61352259/159221020-88b029fb-6091-441f-9e7f-06ff9d79b0b5.png" title="http://localhost:8086/h2-console/" width="300"/>
-<img src="https://user-images.githubusercontent.com/61352259/159221084-7f46bd59-1502-45b9-ab8e-cfd8429e43b2.png" title="http://localhost:8086/h2-console/" width="300"/>
+<img src="https://user-images.githubusercontent.com/61352259/159221020-88b029fb-6091-441f-9e7f-06ff9d79b0b5.png" title="http://localhost:8086/h2-console/" width="300"/> <img src="https://user-images.githubusercontent.com/61352259/159221084-7f46bd59-1502-45b9-ab8e-cfd8429e43b2.png" title="http://localhost:8086/h2-console/" width="300"/>
 <img src="https://user-images.githubusercontent.com/61352259/159221117-3b178b0c-43e9-4226-a14f-22c9ca7988b6.png" title="http://localhost:8086/h2-console/" width="300"/>
 
 
