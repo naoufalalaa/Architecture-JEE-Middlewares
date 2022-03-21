@@ -25,7 +25,7 @@ server.port=8086
 
 
 - WEB :
-```spring
+```java
 @GetMapping("/users")
 public List<User> users(){
     return userService.getUSERS();
@@ -33,8 +33,8 @@ public List<User> users(){
 ```
 <img src="https://user-images.githubusercontent.com/61352259/159221166-ce450c05-4f05-4799-be9d-0d3c9a34623b.png" title="http://localhost:8086/users/" width="300"/>
 
-```
-@GetMapping("/users/{username}")
+```java
+@GetMapping("/users/{username}") 
 public User userSearch(@PathVariable String username){
     return userService.findUserByUsername(username);
 }
