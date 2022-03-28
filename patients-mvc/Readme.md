@@ -5,6 +5,7 @@
 
 - ***SpringMVC***
 - ***MySQL***
+- ***ThymeLeaf*** template engine
 
 ### Strategie :
 #### using *MYSQL* DataBase :
