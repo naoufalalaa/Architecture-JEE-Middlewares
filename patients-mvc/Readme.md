@@ -1,9 +1,21 @@
 # SpringMVC
 
 > This work is about using Mysql database and project structure of entities / repositories / services and web
+
+
+<img src="https://user-images.githubusercontent.com/61352259/161333754-a86f33f4-5a45-4d90-a29c-7ba3ed49f41d.png" title="welcome page" width="600"/>
+
+<img src="https://user-images.githubusercontent.com/61352259/161333754-a86f33f4-5a45-4d90-a29c-7ba3ed49f41d.png" title="Index" width="600"/>
+
+![part1](https://user-images.githubusercontent.com/61352259/161339505-a9b3c5db-d58a-4650-afd8-276a3fe9d45c.gif)
+![part2-edit](https://user-images.githubusercontent.com/61352259/161339594-f5552ac1-e43a-418f-acba-8802b0d86b93.gif)
+![part3-add](https://user-images.githubusercontent.com/61352259/161339597-ccbbfcea-c7ae-4e01-b7ce-58b97587fad2.gif)
+
+
 ### Technologies :
 
-- ***SpringMVC***
+- ***SpringMV
+C***
 - ***MySQL***
 - ***ThymeLeaf*** template engine
 
