@@ -9,9 +9,11 @@
     <script src="/webjars/uikit/3.9.2/js/uikit.min.js"></script>-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.13.7/css/uikit.min.css" integrity="sha512-25qfgaQH9ToJU+AEOb3Mm+ahAx+YEcPsrgoJa2j1LjCsLVngJ3nCue6HTyU60xLdColE/PXwhIWm/CO9SI4AiA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.13.7/js/uikit.min.js" integrity="sha512-lcDSHed0R2EpPDz/auaNM21dpPKsbgaqD+UzgQpvAgwfshX3LK8DiKuMfGC1TgMDa2Q4havYDVu+RTLUAKcT/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/js/all.min.js" integrity="sha512-6PM0qYu5KExuNcKt5bURAoT6KCThUmHRewN3zUFNaoI6Di7XJPTMoT6K0nsagZKk2OB4L7E3q1uQKHNHd4stIQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <title>Patients</title>
+    <title>Étudiants</title>
 </head>
 <body>
 <nav class="uk-navbar-container uk-margin-large-bottom" uk-navbar="mode: click; offset:0">
@@ -20,11 +22,11 @@
         <ul class="uk-navbar-nav">
             <li class="uk-active"><a th:href="@{/index}">Home</a></li>
             <li>
-                <a href="#">Patients <i class="fa-solid fa-angle-down"></i></a>
+                <a href="#">Étudiants <i class="fa-solid fa-angle-down"></i></a>
                 <div class="uk-navbar-dropdown">
                     <ul class="uk-nav uk-navbar-dropdown-nav" sec:authorize="isAuthenticated()">
                         <li sec:authorize="isAuthenticated()"><a th:href="@{/index}">Chercher</a></li>
-                        <li sec:authorize="hasRole('ADMIN')"><a th:href="@{/formPatient}">Ajouter Patient</a></li>
+                        <li sec:authorize="hasRole('ADMIN')"><a th:href="@{/formPatient}">Ajouter étudiant</a></li>
                     </ul>
                 </div>
             </li>
@@ -40,7 +42,7 @@
                 </a>
                 <div class="uk-navbar-dropdown">
                     <ul class="uk-nav uk-navbar-dropdown-nav">
-                        <li><a th:href="@{/formPatient}" sec:authorize="hasRole('ADMIN')">Ajouter Patient</a></li>
+                        <li><a th:href="@{/formPatient}" sec:authorize="hasRole('ADMIN')">Ajouter étudiant</a></li>
                         <li><a th:href="@{/logout}">Logout</a></li>
                     </ul>
                 </div>
