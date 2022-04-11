@@ -77,6 +77,8 @@ public class PatientController {
                        @RequestParam(defaultValue = "") String keyword){
         if (bindingResult.hasErrors()) return "formPatient";
         patientRepository.save(patient);
+        System.out.println(patient.getId());
+        System.out.println(patient.getNom());
         return "redirect:/index?page"+page+"&keyword"+keyword;
     }
 

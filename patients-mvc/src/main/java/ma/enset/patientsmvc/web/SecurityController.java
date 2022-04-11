@@ -11,4 +11,8 @@ public class SecurityController {
         return "403";
     }
 
+    @GetMapping("/login")
+    public String loginPage(){
+        return "login";
+    }
 }
