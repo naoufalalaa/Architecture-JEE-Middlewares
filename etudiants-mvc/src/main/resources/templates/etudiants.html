@@ -24,7 +24,8 @@
                         <td th:text="${e.nom}"></td>
                         <td th:text="${e.prenom}"></td>
                         <td th:text="${e.dateNaissance}"></td>
-                        <td><i th:class="${e.en_regle}?'fa-solid fa-file-circle-check':'fa-solid fa-file-exclamation'"></i> <span th:text="${e.en_regle}?'malade':'en bonne santé'"></span></td>
+                        <td><i th:class="${e.en_regle}?'fa-solid fa-file-circle-check':'fa-solid fa-file-exclamation'"></i> <span th:text="${e.en_regle}?'En règle':'Pas en règle'"></span></td>
+                        <td th:text="${e.genre}?'FEMININ':'MASCULIN'"></td>
                         <td th:text="${e.email}"></td>
 
                         <td sec:authorize="hasRole('ADMIN')">
@@ -32,7 +33,7 @@
                                 Delete
                             </a>
                             <a class="uk-button uk-button-primary"
-                               th:href="@{editPatient(id=${e.id}, keyword=${keyword}, page=${currentPage})}"><i
+                               th:href="@{editEtudiant(id=${e.id}, keyword=${keyword}, page=${currentPage})}"><i
                                     class="fas fa-user-edit"></i> Edit</a>
                         </td>
                     </tr>

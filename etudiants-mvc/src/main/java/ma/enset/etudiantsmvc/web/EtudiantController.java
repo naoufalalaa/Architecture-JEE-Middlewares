@@ -28,7 +28,7 @@ public class EtudiantController {
         if(page<0) {
             return "redirect:/index?page=" + 0 + "&keyword=" + keyword;
         }
-        Page<Etudiant> pageEtudiant=etudiantRepository.findByNom(keyword, PageRequest.of(page,size));
+        Page<Etudiant> pageEtudiant=etudiantRepository.findByNomContains(keyword, PageRequest.of(page,size));
         if(page>pageEtudiant.getTotalPages()){
             return "redirect:/index?page="+(pageEtudiant.getTotalPages()-1)+"&keyword="+keyword;
         }
@@ -36,10 +36,12 @@ public class EtudiantController {
         model.addAttribute("pages",new int[pageEtudiant.getTotalPages()]);
         model.addAttribute("currentPage",page);
         model.addAttribute("keyword",keyword);
+        System.out.println(pageEtudiant.getTotalPages());
+        System.out.println(pageEtudiant.getTotalElements());
         return "etudiants";
     }
     @GetMapping("/delete")
-    public String delete(String id, String keyword, int page) {
+    public String delete(Long id, String keyword, int page) {
         etudiantRepository.deleteById(id);
         return "redirect:/index?page="+page+"&keyword="+keyword;
     }
@@ -61,7 +63,7 @@ public class EtudiantController {
     }
 
     @GetMapping("/editEtudiant")
-    public String editEtudiant(Model model,String id,String keyword,int page){
+    public String editEtudiant(Model model,Long id,String keyword,int page){
         Etudiant etudiant = etudiantRepository.findById(id).orElse(null);
         System.out.println(etudiant.getNom());
         if (etudiant==null) throw new RuntimeException("Etudiant introuvable");
