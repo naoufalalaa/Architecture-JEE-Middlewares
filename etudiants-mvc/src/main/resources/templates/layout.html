@@ -26,7 +26,7 @@
                 <div class="uk-navbar-dropdown">
                     <ul class="uk-nav uk-navbar-dropdown-nav" sec:authorize="isAuthenticated()">
                         <li sec:authorize="isAuthenticated()"><a th:href="@{/index}">Chercher</a></li>
-                        <li sec:authorize="hasRole('ADMIN')"><a th:href="@{/formEtudiant}">Ajouter étudiant</a></li>
+                        <li sec:authorize="hasAnyRole('ADMIN')"><a th:href="@{/formEtudiant}">Ajouter étudiant</a></li>
                     </ul>
                 </div>
             </li>

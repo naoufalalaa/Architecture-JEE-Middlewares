@@ -46,7 +46,6 @@ public class EtudiantsMvcApplication {
             securityService.saveNewRole("ADMIN","deep access");
 
             securityService.addRoleToUser("naoufal","ADMIN");
-            securityService.addRoleToUser("naoufal","USER");
             securityService.addRoleToUser("issam","USER");
             securityService.addRoleToUser("yassine","USER");
 
