@@ -20,13 +20,13 @@
     <div class="uk-navbar-left uk-margin-large-left">
 
         <ul class="uk-navbar-nav">
-            <li class="uk-active"><a th:href="@{/index}">Home</a></li>
+            <li class="uk-active"><a th:href="@{/user/index}">Home</a></li>
             <li>
                 <a href="#">Étudiants <i class="fa-solid fa-angle-down"></i></a>
                 <div class="uk-navbar-dropdown">
                     <ul class="uk-nav uk-navbar-dropdown-nav" sec:authorize="isAuthenticated()">
-                        <li sec:authorize="isAuthenticated()"><a th:href="@{/index}">Chercher</a></li>
-                        <li sec:authorize="hasAnyRole('ADMIN')"><a th:href="@{/formEtudiant}">Ajouter étudiant</a></li>
+                        <li sec:authorize="isAuthenticated()"><a th:href="@{/user/index}">Chercher</a></li>
+                        <li sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/admin/formEtudiant}">Ajouter étudiant</a></li>
                     </ul>
                 </div>
             </li>
@@ -42,7 +42,7 @@
                 </a>
                 <div class="uk-navbar-dropdown">
                     <ul class="uk-nav uk-navbar-dropdown-nav">
-                        <li><a th:href="@{/formEtudiant}" sec:authorize="hasRole('ADMIN')">Ajouter étudiant</a></li>
+                        <li><a th:href="@{/admin/formEtudiant}" sec:authorize="hasAuthority('ADMIN')">Ajouter étudiant</a></li>
                         <li><a th:href="@{/logout}">Logout</a></li>
                     </ul>
                 </div>

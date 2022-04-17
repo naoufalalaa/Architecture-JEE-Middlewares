@@ -1,4 +1,5 @@
 package ma.enset.etudiantsmvc.security;
+import lombok.AllArgsConstructor;
 import ma.enset.etudiantsmvc.security.service.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -12,28 +13,23 @@ import javax.sql.DataSource;
 
 @Configuration
 @EnableWebSecurity
+@AllArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-
-    @Autowired
-    private DataSource dataSource;
-    @Autowired
     private UserDetailsServiceImpl userDetailsServiceImpl;
-    @Autowired
-    private PasswordEncoder passwordEncoder;
 
-    @Override
+    @Override // pour configurer le UserDetailsService
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsServiceImpl);
     }
 
-    @Override
+    @Override // pour configurer les routes
     protected void configure(HttpSecurity http) throws Exception {
-        http.formLogin().loginPage("/login");
-        http.authorizeRequests().antMatchers("/").permitAll();
+        http.formLogin().loginPage("/login");// pour configurer le login
+        http.authorizeRequests().antMatchers("/").permitAll();// pour configurer les routes
         http.authorizeRequests().antMatchers("/login").permitAll();
-        http.authorizeRequests().antMatchers("/delete/**","/editEtudiant/**","/formEtudiant/**").hasAuthority("ADMIN");
+        http.authorizeRequests().antMatchers("/admin/**").hasAnyAuthority("ADMIN");
+        http.authorizeRequests().antMatchers("/user/**").hasAnyAuthority("USER");
         http.authorizeRequests().antMatchers("/webjars/**").permitAll();
-        http.authorizeRequests().antMatchers("/index/**").hasAuthority("USER");
         http.authorizeRequests().anyRequest().authenticated();
         http.exceptionHandling().accessDeniedPage("/403");
     }

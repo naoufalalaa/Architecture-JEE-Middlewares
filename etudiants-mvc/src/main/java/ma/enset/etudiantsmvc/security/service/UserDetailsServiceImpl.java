@@ -10,8 +10,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.Collection;
+import java.util.stream.Collectors;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
@@ -21,12 +21,14 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         AppUser appUser = securityService.loadUserByUserName(username);
-            Collection<GrantedAuthority> authorities = new ArrayList<>();
-        appUser.getAppRoles().forEach(role ->{
-            SimpleGrantedAuthority authority = new SimpleGrantedAuthority(role.getRoleName());
-            authorities.add(authority);
-        });
-        User springSecUser = new User(appUser.getUsername(),appUser.getPassword(),authorities);
-        return springSecUser;
+        //en utilisant l'API des streams
+        Collection<GrantedAuthority> authorities1 = appUser
+                .getAppRoles()
+                .stream()
+                .map(role-> new SimpleGrantedAuthority(role.getRoleName()))
+                .collect(Collectors.toList());
+
+        User user = new User(appUser.getUsername(),appUser.getPassword(),authorities1);
+        return user;
     }
 }

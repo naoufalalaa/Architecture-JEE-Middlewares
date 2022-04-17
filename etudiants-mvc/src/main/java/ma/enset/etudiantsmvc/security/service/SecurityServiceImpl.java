@@ -12,17 +12,17 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.UUID;
 
-@Service
-@Slf4j
-@AllArgsConstructor
-@Transactional
+@Service //@Service pour que cette classe soit un service
+@Slf4j // log
+@AllArgsConstructor // injection de dependance
+@Transactional // transaction
 public class SecurityServiceImpl implements SecurityService {
     private AppUserRepository appUserRepository;
     private AppRoleRepository appRoleRepository;
     private PasswordEncoder appPasswordEncoder;
 
 
-    @Override
+    @Override //@Transactional
     public AppUser saveNewUser(String username, String password, String rePassword) {
         if(!password.equals(rePassword)) throw new RuntimeException("Password doesn't match");
         String hashedPWD = appPasswordEncoder.encode(password);
@@ -35,7 +35,7 @@ public class SecurityServiceImpl implements SecurityService {
         return savedAppUser;
     }
 
-    @Override
+    @Override //@Transactional
     public AppRole saveNewRole(String roleName, String description) {
         AppRole appRole = appRoleRepository.findByRoleName(roleName);
         if(appRole != null) throw new RuntimeException("Role "+roleName+" already exists");
@@ -46,7 +46,7 @@ public class SecurityServiceImpl implements SecurityService {
         return savedAppRole;
     }
 
-    @Override
+    @Override //@Transactional
     public void addRoleToUser(String username, String roleName) {
         AppUser appUser = appUserRepository.findByUsername(username);
         if(appUser==null) throw new RuntimeException("User "+username+" not found !");
@@ -56,7 +56,7 @@ public class SecurityServiceImpl implements SecurityService {
         appUserRepository.save(appUser);
     }
 
-    @Override
+    @Override //@Transactional
     public void removeRoleFromUser(String username, String roleName) {
         AppUser appUser = appUserRepository.findByUsername(username);
         if(appUser==null) throw new RuntimeException("User "+username+" not found !");
@@ -66,7 +66,7 @@ public class SecurityServiceImpl implements SecurityService {
         appUserRepository.save(appUser);
     }
 
-    @Override
+    @Override //@Transactional
     public AppUser loadUserByUserName(String username) {
         return appUserRepository.findByUsername(username);
     }

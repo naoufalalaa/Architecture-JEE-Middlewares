@@ -26,25 +26,26 @@ public class EtudiantsMvcApplication {
         SpringApplication.run(EtudiantsMvcApplication.class, args);
     }
 
-    //@Bean
+    @Bean
     CommandLineRunner init(EtudiantRepository etudiantRepository){
         return args -> {
             etudiantRepository.save(new Etudiant(null, "Naoufal", "ALAA", "alaanaoufal@gmail.com", Genre.MASCULIN, new Date(), true));
             etudiantRepository.save(new Etudiant(null, "Majid", "Ramli", "ramli@gmail.com", Genre.MASCULIN, new Date(), false));
             etudiantRepository.save(new Etudiant(null, "Hamza", "Ait", "hamza@gmail.com", Genre.MASCULIN, new Date(), true));
-            etudiantRepository.save(new Etudiant(null, "Khaoula", "elmajni", "khaoula@gmail.com", Genre.FEMININ, new Date(), true));
+            etudiantRepository.save(new Etudiant(null, "Khaoula", "lahssini", "khaoula@gmail.com", Genre.FEMININ, new Date(), true));
         };
     }
     //@Bean
     CommandLineRunner saveUsers(SecurityService securityService){
         return args -> {
+            securityService.saveNewRole("USER","standard access");
+            securityService.saveNewRole("ADMIN","deep access");
+
             securityService.saveNewUser("naoufal","1620","1620");
             securityService.saveNewUser("yassine","0000","0000");
             securityService.saveNewUser("issam","1111","1111");
 
-            securityService.saveNewRole("USER","standard access");
-            securityService.saveNewRole("ADMIN","deep access");
-
+            securityService.addRoleToUser("naoufal","USER");
             securityService.addRoleToUser("naoufal","ADMIN");
             securityService.addRoleToUser("issam","USER");
             securityService.addRoleToUser("yassine","USER");
