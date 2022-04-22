@@ -9,30 +9,29 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 
-@Configuration
-@EnableWebSecurity
-@AllArgsConstructor
+@Configuration // cette annotation permet de configurer le security
+@EnableWebSecurity // permet de configurer le security
+@AllArgsConstructor // pour injecter les dépendances
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-    private UserDetailsServiceImpl userDetailsServiceImpl;
+    private UserDetailsServiceImpl userDetailsServiceImpl; //injection de dependance
 
     @Override // pour configurer le UserDetailsService
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsServiceImpl);
+        auth.userDetailsService(userDetailsServiceImpl); // pour configurer le UserDetailsService
     }
 
-    @Override // pour configurer les routes
-    protected void configure(HttpSecurity http) throws Exception {
-        http.formLogin().loginPage("/login").permitAll();
-        http.logout().logoutSuccessHandler((req, res, auth) -> res.sendRedirect("/login"));
-        http.authorizeRequests().antMatchers("/").permitAll();// pour configurer les routes
-        http.authorizeRequests().antMatchers("/admin/**").hasAnyAuthority("ADMIN");
-        http.authorizeRequests().antMatchers("/user/**").hasAnyAuthority("USER");
-        http.authorizeRequests().antMatchers("/webjars/**").permitAll();
-        http.authorizeRequests().antMatchers("/images/**").permitAll();
-        http.authorizeRequests().antMatchers("/static/**").permitAll();
-        http.authorizeRequests().anyRequest().authenticated();
-        http.logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout", "GET"));
-        http.exceptionHandling().accessDeniedPage("/403");
+    @Override
+    protected void configure(HttpSecurity http) throws Exception { // pour configurer les routes
+        http.formLogin().loginPage("/login").permitAll(); // pour configurer la route du login
+        http.logout().logoutSuccessHandler((req, res, auth) -> res.sendRedirect("/login")); // pour configurer la route du logout et rediriger vers la route du login
+        http.authorizeRequests().antMatchers("/").permitAll();// pour configurer la route de l'accueil et autoriser tout le monde
+        http.authorizeRequests().antMatchers("/admin/**").hasAnyAuthority("ADMIN"); // pour configurer la route de l'admin et autoriser uniquement les admins
+        http.authorizeRequests().antMatchers("/user/**").hasAnyAuthority("USER"); // pour configurer la route de l'user et autoriser uniquement les users
+        http.authorizeRequests().antMatchers("/webjars/**").permitAll(); // pour configurer la route de webjars et autoriser tout le monde
+        http.authorizeRequests().antMatchers("/images/**").permitAll(); // pour configurer la route des images et autoriser tout le monde
+        http.authorizeRequests().antMatchers("/static/**").permitAll(); // pour configurer la route des fichiers statiques et autoriser tout le monde
+        http.authorizeRequests().anyRequest().authenticated(); // pour configurer toutes les routes et autoriser tout le monde
+        http.exceptionHandling().accessDeniedPage("/403"); // pour configurer la route de l'erreur 403
     }
 
 }
