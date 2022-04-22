@@ -5,7 +5,7 @@
       layout:decorate="layout">
 <div layout:fragment="content">
     <div align="center">
-        <div class="uk-card uk-card-default uk-width-2-3">
+        <div class="uk-card uk-card-default uk-box-shadow-medium uk-width-2-3">
             <div class="uk-card-header">
                 <h3>Étudiants</h3>
             </div>
@@ -28,37 +28,44 @@
                         <td th:text="${e.genre}"></td>
                         <td th:text="${e.email}"></td>
 
-                        <td sec:authorize="hasAuthority('ADMIN')">
-                            <a onclick="return confirm('Etes vous sure?')" class="uk-button uk-button-danger" th:href="@{/admin/delete(id=${e.id}, keyword=${keyword}, page=${currentPage})}">
-                                Delete
-                            </a>
-                            <a class="uk-button uk-button-primary"
-                               th:href="@{/admin/editEtudiant(id=${e.id}, keyword=${keyword}, page=${currentPage})}"><i
-                                    class="fas fa-user-edit"></i> Edit</a>
+                        <td class="uk-grid" uk-grid sec:authorize="hasAuthority('ADMIN')">
+
+                            <div class="uk-width-1-2">
+                                <a class="uk-button uk-button-primary"
+                                   th:href="@{/admin/editEtudiant(id=${e.id}, keyword=${keyword}, page=${currentPage})}">
+                                    <i class="fas fa-user-edit"></i>
+                                </a>
+                            </div>
+
+                            <div class="uk-width-1-2">
+                                <a onclick="return confirm('Etes vous sure?')" class="uk-button uk-button-danger" th:href="@{/admin/delete(id=${e.id}, keyword=${keyword}, page=${currentPage})}">
+                                    <small>
+                                        <i class="fa-solid fa-trash-can"></i>
+                                    </small>
+                                </a>
+                            </div>
+
                         </td>
                     </tr>
                     </tbody>
                 </table>
             </div>
+        </div>
+        <div class="uk-card uk-card-default uk-box-shadow-medium uk-margin-top uk-width-2-3">
             <div class="uk-card-footer">
                 <nav aria-label="Page navigation example">
                     <ul class="uk-pagination">
                         <li ><a  th:href="@{/user/index(page=${currentPage}-1, keyword=${keyword})}">Previous</a></li>
-
                         <li  th:class="${status.index==currentPage?'uk-active':' '}" th:each="page,status:${pages}">
-                            <a
-                               th:text="${status.index+1}"
+                            <a th:text="${status.index+1}"
                                th:href="@{/user/index(page=${status.index}, keyword=${keyword})}"
-
                             ></a>
                         </li>
-
                         <li><a th:href="@{/user/index(page=${currentPage}+1, keyword=${keyword})}">Next</a></li>
                     </ul>
                 </nav>
             </div>
         </div>
-
     </div>
 </div>
 </html>

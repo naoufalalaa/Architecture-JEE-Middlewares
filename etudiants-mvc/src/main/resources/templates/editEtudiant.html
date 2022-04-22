@@ -4,7 +4,9 @@
       layout:decorate="layout">
 
 <div layout:fragment="content" th:align="center">
-    <div class="uk-width-2-3@m uk-text-left uk-padding uk-card uk-card-default">
+    <div class="uk-width-2-3@m uk-text-left  uk-box-shadow-large uk-padding uk-card uk-card-default">
+        <h3 class="uk-card-title uk-text-center">Modifier un étudiant</h3>
+        <hr/>
         <form class="uk-form-horizontal uk-grid-margin-medium uk-text-left" method="post" th:action="@{/admin/save(page=${page},keyword=${keyword})}">
             <div>
                 <label class="uk-form-label" for="id">ID : </label>

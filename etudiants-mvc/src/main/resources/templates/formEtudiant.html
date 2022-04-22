@@ -3,53 +3,57 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="layout">
 <div layout:fragment="content" th:align="center">
-    <div class="uk-card uk-card-default uk-padding uk-box-shadow-hover uk-width-2-3">
-        <form method="post" class="uk-grid-margin-medium uk-text-left" th:action="@{/admin/save}">
-            <div>
-                <div class="uk-form-controls">
-                    <input id="nom" class="uk-input" placeholder="Nom" type="text" name="nom" th:value="${etudiant.nom}">
+    <div class="uk-card uk-card-default uk-padding uk-box-shadow-large uk-width-2-3">
+        <div class="uk-card-header">
+            <h3 class="uk-card-title">Formulaire d'inscription</h3>
+            <hr/>
+                <form method="post" class="uk-grid-margin-medium uk-text-left" th:action="@{/admin/save}">
+                    <div class=" uk-margin-medium">
+                        <div class="uk-form-controls">
+                            <input id="nom" class="uk-input" placeholder="Nom" type="text" name="nom" th:value="${etudiant.nom}">
+                        </div>
+                        <span class="text-danger" th:errors="${etudiant.nom}"></span>
+                    </div>
+                    <div class=" uk-margin-medium">
+                        <div class="uk-form-controls">
+                            <input id="prenom" placeholder="Prenom" class="uk-input" type="text" name="prenom" th:value="${etudiant.prenom}">
+                        </div>
+                        <span class="text-danger" th:errors="${etudiant.prenom}"></span>
+                    </div>
+                    <div class=" uk-margin-medium">
+                        <div class="uk-form-controls">
+                            <input id="email" class="uk-input" placeholder="Email" type="email" name="email" th:value="${etudiant.email}"/>
+                        </div>
+                        <span class="uk-text-danger" th:errors="${etudiant.email}"></span>
+                    </div>
+                    <div class=" uk-margin-medium">
+                        <div class="uk-form-controls">
+                            <input class="uk-input" placeholder="Date de Naissance" type="date" name="dateNaissance" th:value="${etudiant.dateNaissance}">
+                        </div>
+                        <span class="uk-text-danger" th:errors="${etudiant.dateNaissance}"></span>
+                    </div>
+                    <div class=" uk-margin-medium">
+                        <label class="uk-form-label">En règle : </label>
+                        <div class="uk-form-controls">
+                            <input class="uk-checkbox" type="checkbox" name="en_regle" th:checked="${etudiant.en_regle}">
+                        </div>
+                        <span class="uk-text-danger" th:errors="${etudiant.en_regle}"></span>
+                    </div>
+                    <div class=" uk-margin-medium">
+                        <label class="uk-form-label">Genre : </label>
+                        <div th:each="model : ${T(ma.enset.etudiantsmvc.entities.Genre).values()}">
+                            <div class="uk-form-controls">
+                                <input type="radio" th:field="*{etudiant.genre}" th:value="${model}" class="uk-radio">
+                                <label class="custom-control-label" th:for="${#ids.prev('genre')}" th:text="${model}">model</label>
+                            </div>
+                        </div>
+                    </div>
+                <div class="uk-margin-large">
+                    <button type="submit" class="uk-button uk-button-primary">Ajouter</button>
                 </div>
-                <span class="text-danger" th:errors="${etudiant.nom}"></span>
-            </div>
-            <div>
-                <div class="uk-form-controls">
-                    <input id="prenom" placeholder="Prenom" class="uk-input" type="text" name="prenom" th:value="${etudiant.prenom}">
-                </div>
-                <span class="text-danger" th:errors="${etudiant.prenom}"></span>
-            </div>
-            <div>
-                <div class="uk-form-controls">
-                    <input id="email" class="uk-input" placeholder="Email" type="email" name="email" th:value="${etudiant.email}"/>
-                </div>
-                <span class="uk-text-danger" th:errors="${etudiant.email}"></span>
-            </div>
-            <div>
-                <div class="uk-form-controls">
-                    <input class="uk-input" placeholder="Date de Naissance" type="date" name="dateNaissance" th:value="${etudiant.dateNaissance}">
-                </div>
-                <span class="uk-text-danger" th:errors="${etudiant.dateNaissance}"></span>
-            </div>
-            <div>
-                <label class="uk-form-label">En règle : </label>
-                <div class="uk-form-controls">
-                    <input class="uk-checkbox" type="checkbox" name="malade" th:checked="${etudiant.en_regle}">
-                </div>
-                <span class="uk-text-danger" th:errors="${etudiant.en_regle}"></span>
-            </div>
 
-            <div th:each="model : ${T(ma.enset.etudiantsmvc.entities.Genre).values()}">
-                <div class="uk-form-controls">
-                    <input type="radio" th:field="*{etudiant.genre}" th:value="${model}" class="uk-radio">
-                    <label class="custom-control-label" th:for="${#ids.prev('genre')}" th:text="${model}">model</label>
-                </div>
-            </div>
-
-
-            <div>
-                <button type="submit" class="uk-button uk-button-primary">Ajouter</button>
-            </div>
-
-        </form>
+            </form>
+        </div>
     </div>
 </div>
 </html>

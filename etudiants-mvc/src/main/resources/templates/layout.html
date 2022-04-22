@@ -16,7 +16,40 @@
     <title>Étudiants</title>
 </head>
 <body>
-<nav class="uk-navbar-container uk-margin-large-bottom" uk-navbar="mode: click; offset:0">
+<style>
+    a{
+        color: #1B4D3E;
+    }
+    .uk-button {
+        border-radius: 5px;
+    }
+    .uk-card{
+        border-radius: 5px;
+    }
+    a{
+        transition: all 0.5s ease;
+    }
+    .logbtn{
+        color: rgba(255,255,255,0.7) !important;
+    }
+    .logbtn:hover{
+        color: white !important;
+    }
+    a:hover{
+        transition: all 0.5s ease;
+    }
+    .uk-button-primary{
+        background: #1B4D3E !important;
+        transition: all 0.5s ease;
+    }
+    .uk-button-primary:hover{
+        background: #256955 !important;
+        transition: all 0.5s ease;
+    }
+</style>
+<svg style="position: absolute" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#1B4D3E" fill-opacity="1" d="M0,0L288,32L576,128L864,32L1152,320L1440,192L1440,0L1152,0L864,0L576,0L288,0L0,0Z"></path></svg>
+
+<nav class="uk-navbar-container uk-navbar-transparent uk-margin-large-bottom" uk-navbar="mode: click; offset:0">
     <div class="uk-navbar-left uk-margin-large-left">
 
         <ul class="uk-navbar-nav">
@@ -24,8 +57,8 @@
             <li>
                 <a href="#">Étudiants <i class="fa-solid fa-angle-down"></i></a>
                 <div class="uk-navbar-dropdown">
-                    <ul class="uk-nav uk-navbar-dropdown-nav" sec:authorize="isAuthenticated()">
-                        <li sec:authorize="isAuthenticated()"><a th:href="@{/user/index}">Chercher</a></li>
+                    <ul class="uk-nav uk-navbar-dropdown-nav">
+                        <li><a th:href="@{/user/index}">Chercher</a></li>
                         <li sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/admin/formEtudiant}">Ajouter étudiant</a></li>
                     </ul>
                 </div>
@@ -37,7 +70,7 @@
     <div class="uk-navbar-right uk-margin-large-right" >
         <ul class="uk-navbar-nav" sec:authorize="isAuthenticated()">
             <li>
-                <a href="#">
+                <a class="logbtn" href="#">
                     <span sec:authentication="name"></span> <i class="fa-solid fa-angle-down"></i>
                 </a>
                 <div class="uk-navbar-dropdown">
@@ -49,7 +82,7 @@
             </li>
         </ul>
         <ul class="uk-navbar-nav" sec:authorize="!isAuthenticated()">
-            <li><a th:href="@{/login}"> Login</a></li>
+            <li><a class="logbtn" th:href="@{/login}"> Login</a></li>
         </ul>
     </div>
 </nav>

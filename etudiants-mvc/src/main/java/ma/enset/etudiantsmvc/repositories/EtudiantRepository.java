@@ -11,5 +11,4 @@ import java.util.Optional;
 public interface EtudiantRepository extends JpaRepository<Etudiant, Long> {
     Page<Etudiant> findByNomContains(String nom, Pageable pageable);
     Etudiant findById(int ID);
-
 }
