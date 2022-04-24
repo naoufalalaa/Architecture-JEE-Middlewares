@@ -10,8 +10,11 @@
 </head>
 <body>
 <div layout:fragment="content">
-    <div class="uk-margin-large">
-        <h2 class="uk-text-center">La page n'est pas accessible</h2>
+    <div class="uk-margin-large uk-text-center">
+        <h2 class="uk-text-center">La page n'est pas autorisée</h2>
+        <p class="uk-text-center">Vous n'êtes pas autorisé à accéder à cette page.</p>
+        <img src="../static/images/output-onlinegiftools.gif" th:src="@{/images/output-onlinegiftools.gif}" width="200px">
+        <a th:href="@{/}" class="uk-button uk-button-primary">Retour à l'accueil</a>
     </div>
 </div>
 </body>

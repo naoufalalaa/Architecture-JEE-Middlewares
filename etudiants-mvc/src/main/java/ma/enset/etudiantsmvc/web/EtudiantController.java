@@ -17,18 +17,19 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.validation.Valid;
 import java.util.List;
 
-@Controller
-@AllArgsConstructor
-@Data
+@Controller // annotation pour dire que c'est un controller
+@AllArgsConstructor // annotation pour injecter tous les arguments dans le constructeur
+@Data // annotation pour injecter tous les attributs dans les getters et setters
 public class EtudiantController {
     private EtudiantRepository etudiantRepository;//repository
     @GetMapping("/user/index")
-    public String etudiants(Model model,
-                            @RequestParam(name = "page",defaultValue = "0") int page,
-                            @RequestParam(name = "size",defaultValue = "5") int size,
-                            @RequestParam(name = "keyword",defaultValue = "") String keyword) throws Exception{
+    public String etudiants(Model model, //pour recuperer les données de l'etudiant
+                            @RequestParam(name = "page",defaultValue = "0") int page, //page est la page actuelle
+                            @RequestParam(name = "size",defaultValue = "5") int size, //size est le nombre d'element par page
+                            @RequestParam(name = "keyword",defaultValue = "") String keyword //keyword est le mot clé
+    ) throws Exception{
         if(page<0) {//pour eviter les erreurs
-            return "redirect:/user/index?page=" + 0 + "&keyword=" + keyword;
+            return "redirect:/user/index?page=" + 0 + "&keyword=" + keyword; //redirection vers la page 0
         }
         Page<Etudiant> pageEtudiant=etudiantRepository.findByNomContains(keyword, PageRequest.of(page,size));//pour recuperer les données de l'etudiant
         if(page>pageEtudiant.getTotalPages()){//pour verifier si la page demandé est supérieur au nombre de page
@@ -42,8 +43,8 @@ public class EtudiantController {
     }
     @GetMapping("/admin/delete")
     public String delete(Long id, String keyword, int page) {//pour supprimer un etudiant
-        etudiantRepository.deleteById(id);
-        return "redirect:/user/index?page="+page+"&keyword="+keyword;
+        etudiantRepository.deleteById(id); //pour supprimer un etudiant
+        return "redirect:/user/index?page="+page+"&keyword="+keyword; //pour rediriger vers la page d'accueil
     }
     @GetMapping("/")
     public String home() {//pour afficher la page d'accueil
@@ -51,14 +52,14 @@ public class EtudiantController {
     }
 
     @GetMapping("/user/etudiants")//pour recuperer les données de l'etudiant
-    @ResponseBody//pour dire que c'est un données json
+    @ResponseBody//pour dire que c'est des données json
     public List<Etudiant> listEtudiants(){
         return etudiantRepository.findAll();
     }
 
     @GetMapping("/admin/formEtudiant") //pour afficher le formulaire
-    public String formEtudiant(Model model){
-        model.addAttribute("etudiant",new Etudiant());
+    public String formEtudiant(Model model){ //pour afficher le formulaire
+        model.addAttribute("etudiant",new Etudiant()); // model est un objet qui contient les données
         return "formEtudiant";
     }
 

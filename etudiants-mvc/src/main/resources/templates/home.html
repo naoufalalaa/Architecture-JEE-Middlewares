@@ -5,11 +5,14 @@
       layout:decorate="layout">
 
 <div layout:fragment="content">
-    <div class="uk-margin-large-left">
-        <h3 class="uk-margin-large uk-text-left">Welcome you all! </h3>
-        <p class="uk-text-left">
-            This is a simple example of a Thymeleaf web application.
-        </p>
+    <div class="uk-margin-large-left uk-text-center">
+        <img class="uk-border-circle" src="../static/images/me.jpg" th:src="@{images/me.jpg}" width="150px" />
+        <h2>
+            <a href="https://linkedin.com/in/naoufal-alaa">
+                Naoufal ALAA
+            </a>
+        </h2>
+        <h2 class="uk-margin-large uk-text-left">Welcome you all! </h2>
         <p class="uk-text-left">
             You can use this as a starting point for your own web application.
         </p>
@@ -17,16 +20,6 @@
             The source code for this web application is available on
             <a href="https://github.com/naoufalalaa">GitHub</a>.
         </p>
-        <div class="uk-width-2-3@m">
-            <h4 class="uk-margin-large uk-text-left"><img class="uk-border-circle" src="../static/images/me.jpg" th:src="@{images/me.jpg}" width="150px" />
-                <a href="https://github.com/naoufalalaa/">
-                    <span class="uk-text-primary">
-                        <i class="fa-brands fa-github"></i>
-                    </span>
-                    Naoufal Alaa
-                </a>
-            </h4>
-        </div>
     </div>
 </div>
 </html>

@@ -15,20 +15,20 @@ import java.util.stream.Collectors;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
-    @Autowired
+    @Autowired //injection de dépendance
     private SecurityService securityService;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         AppUser appUser = securityService.loadUserByUserName(username);
         //en utilisant l'API des streams
-        Collection<GrantedAuthority> authorities1 = appUser
-                .getAppRoles()
-                .stream()
-                .map(role-> new SimpleGrantedAuthority(role.getRoleName()))
-                .collect(Collectors.toList());
+        Collection<GrantedAuthority> authorities1 = appUser //on récupère la liste des roles
+                .getAppRoles() //on récupère la liste des roles
+                .stream() //on transforme la liste en stream
+                .map(role-> new SimpleGrantedAuthority(role.getRoleName())) //on transforme chaque role en objet GrantedAuthority
+                .collect(Collectors.toList());//on transforme le stream en liste
 
-        User user = new User(appUser.getUsername(),appUser.getPassword(),authorities1);
+        User user = new User(appUser.getUsername(),appUser.getPassword(),authorities1);//on crée un objet User
         return user;
     }
 }
