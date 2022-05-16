@@ -1,0 +1,48 @@
+[
+  {
+    "id": 1,
+    "name": "John",
+    "age": 30,
+    "phone": "555-555-5555",
+    "email": "john@enset-media.ac.ma",
+    "salary": 990000,
+    "department": "IT"
+  },
+  {
+    "id": 2,
+    "name": "Jane",
+    "age": 25,
+    "phone": "555-555-5555",
+    "email": "jane@enset-media.ac.ma",
+    "salary" : 40000.99,
+    "department": "Production"
+  },
+  {
+    "id": 3,
+    "name": "Mary",
+    "age": 35,
+    "phone": "555-555-5555",
+    "email": "mary@enset-media.ac.ma",
+    "salary" :  12000.99,
+    "department": "Marketing"
+  },
+  {
+    "id": 4,
+    "name": "Bob",
+    "age": 45,
+    "phone": "555-555-5555",
+    "email": "bob@marley.s",
+    "salary" :  35000.99,
+    "department": "IT"
+  },
+  {
+    "id": 5,
+    "name": "Dave",
+    "age": 35,
+    "phone": "555-555-5555",
+    "email": "dave@enset-media.ac.ma",
+    "salary" :  20000.99,
+    "department": "IT"
+  }
+
+]
