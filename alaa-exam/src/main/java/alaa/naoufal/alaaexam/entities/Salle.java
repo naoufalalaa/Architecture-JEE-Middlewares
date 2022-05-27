@@ -13,6 +13,6 @@ public class Salle {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nom;
-    @OneToMany
+    @OneToMany(mappedBy = "salle")
     private List<Session> sessions;
 }

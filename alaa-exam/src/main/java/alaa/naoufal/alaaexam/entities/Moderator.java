@@ -12,6 +12,6 @@ import java.util.List;
 @Data @NoArgsConstructor @AllArgsConstructor
 public class Moderator extends Participant {
     private String specialite;
-    @OneToMany
+    @OneToMany(mappedBy = "moderator")
     private List<Session> sessions;
 }

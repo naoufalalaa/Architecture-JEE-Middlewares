@@ -4,10 +4,13 @@ import alaa.naoufal.alaaexam.entities.*;
 import alaa.naoufal.alaaexam.enums.Genre;
 import alaa.naoufal.alaaexam.enums.StatutInvitation;
 import alaa.naoufal.alaaexam.repositories.*;
+import alaa.naoufal.alaaexam.security.service.SecurityService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -20,6 +23,34 @@ public class AlaaExamApplication {
     public static void main(String[] args) {
         SpringApplication.run(AlaaExamApplication.class, args);
     }
+
+    //@Bean
+    CommandLineRunner saveUsers(SecurityService securityService){
+        return args -> {
+            securityService.saveNewRole("ROLE_MODERATEUR","standard access");
+            securityService.saveNewRole("ROLE_INVITE","standard access");
+            securityService.saveNewRole("ROLE_CONFERENCIER","standard access");
+            securityService.saveNewRole("ADMIN","deep access");
+
+            securityService.saveNewUser("naoufal","1620","1620");
+            securityService.saveNewUser("yassine","0000","0000");
+            securityService.saveNewUser("issam","1111","1111");
+            securityService.saveNewUser("nasser","1111","1111");
+
+            securityService.addRoleToUser("naoufal","ROLE_MODERATEUR");
+            securityService.addRoleToUser("naoufal","ADMIN");
+            securityService.addRoleToUser("issam","ROLE_INVITE");
+            securityService.addRoleToUser("yassine","ROLE_MODERATEUR");
+            securityService.addRoleToUser("nasser","ROLE_CONFERENCIER");
+
+        };
+    }
+
+    @Bean
+    PasswordEncoder AppPasswordEncoder(){
+        return new BCryptPasswordEncoder();
+    }
+
     @Bean
     CommandLineRunner init(SalleRepository salleRepository,ConferenceRepository conferenceRepository, ParticipantRepository participantRepository, SessionRepository sessionRepository, InscriptionRepository inscriptionRepository) {
         return args -> {
@@ -69,7 +100,7 @@ public class AlaaExamApplication {
             session1.setModerator(moderators.get(0));
             sessionRepository.save(session1);
 
-            Session session2 = new Session();;
+            Session session2 = new Session();
             session2.setNom("Java");
             session2.setSalle(salle2);
             session2.setModerator(moderators.get(1));
@@ -80,6 +111,20 @@ public class AlaaExamApplication {
             session3.setSalle(salle3);
             session3.setModerator(moderators.get(2));
             sessionRepository.save(session3);
+
+            salle1.setSessions(sessionRepository.findAll());
+            salleRepository.save(salle1);
+
+            salle2.setSessions(sessionRepository.findAll());
+            salleRepository.save(salle2);
+
+            salle3.setSessions(sessionRepository.findAll());
+            salleRepository.save(salle3);
+
+            moderators.forEach(moderator -> {
+                moderator.setSessions(sessionRepository.findAll());
+                participantRepository.save(moderator);
+            });
 
             Inscription inscription1 = new Inscription();
             inscription1.setDate(new Date());
@@ -101,6 +146,27 @@ public class AlaaExamApplication {
             inscription3.setStatut(StatutInvitation.VALIDEE);
             inscription3.setSession(session3);
             inscriptionRepository.save(inscription3);
+
+            List<Invite> invites = new ArrayList<>();
+            Stream.of("Khalid","Moustapha","Salim").forEach(
+                    name -> {
+                        Invite invite = new Invite();
+                        invite.setNom(name);
+                        invite.setEmail(name.toLowerCase()+"@gmail.com");
+                        invite.setPhoto(name.toLowerCase()+".jpg");
+                        invite.setAffiliation("Leyton");
+                        invite.setGenre(Genre.MASCULIN);
+                        participantRepository.save(invite);
+                        invites.add(invite);
+                    }
+            );
+
+            invites.forEach(invite -> {
+                invite.setInscriptions(inscriptionRepository.findAll());
+                participantRepository.save(invite);
+            });
+
+
 
             Conference conference1 = new Conference();
             conference1.setTitre("Java");
@@ -136,38 +202,6 @@ public class AlaaExamApplication {
                 speaker.setConferences(conferenceRepository.findAll());
                 participantRepository.save(speaker);
             });
-
-            moderators.forEach(moderator -> {
-                moderator.setSessions(sessionRepository.findAll());
-                participantRepository.save(moderator);
-            });
-            List<Invite> invites = new ArrayList<>();
-            Stream.of("Khalid","Moustapha","Salim").forEach(
-                    name -> {
-                        Invite invite = new Invite();
-                        invite.setNom(name);
-                        invite.setEmail(name.toLowerCase()+"@gmail.com");
-                        invite.setPhoto(name.toLowerCase()+".jpg");
-                        invite.setAffiliation("Leyton");
-                        invite.setGenre(Genre.MASCULIN);
-                        participantRepository.save(invite);
-                        invites.add(invite);
-                    }
-            );
-
-            invites.forEach(invite -> {
-                invite.setInscriptions(inscriptionRepository.findAll());
-                participantRepository.save(invite);
-            });
-
-            salle1.setSessions(sessionRepository.findAll());
-            salleRepository.save(salle1);
-
-            salle2.setSessions(sessionRepository.findAll());
-            salleRepository.save(salle2);
-
-            salle3.setSessions(sessionRepository.findAll());
-            salleRepository.save(salle3);
 
         };
     }

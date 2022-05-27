@@ -90,7 +90,6 @@ public class BankAccountServiceImpl implements BankAccountService {
         List<Customer> customers = customerRepository.findAll();
         List<CustomerDTO> customerDTOS = customers.stream().map(customer -> bankAccountMapper.fromCustomer(customer)).collect(Collectors.toList());
         return customerDTOS;
-
     }
 
     @Override

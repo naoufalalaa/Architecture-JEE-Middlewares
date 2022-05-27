@@ -14,6 +14,6 @@ import java.util.List;
 @Data @NoArgsConstructor @AllArgsConstructor
 public class Speaker extends Participant {
     private String lienProfile;
-    @OneToMany
+    @OneToMany(mappedBy = "speaker")
     private List<Conference> conferences;
 }

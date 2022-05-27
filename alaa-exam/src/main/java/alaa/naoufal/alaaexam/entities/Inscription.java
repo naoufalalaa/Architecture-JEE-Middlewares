@@ -19,6 +19,7 @@ public class Inscription {
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date date;
+    @Enumerated(EnumType.STRING)
     private StatutInvitation statut;
     private double montant;
     @ManyToMany(fetch = FetchType.LAZY)
