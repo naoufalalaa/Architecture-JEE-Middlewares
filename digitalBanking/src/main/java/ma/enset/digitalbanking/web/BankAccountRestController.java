@@ -24,6 +24,13 @@ public class BankAccountRestController {
         return bankAccountService.getBankAccount(accountId);
     }
 
+    @GetMapping("/account/{customerId}")
+    public List<BankAccountDTO> getBankAccountByCustomer(@PathVariable Long customerId) {
+        return bankAccountService.getBankAccountByCustomerId(customerId);
+    }
+
+
+
     @GetMapping("/accounts")
     public List<BankAccountDTO> getBankAccount() {
         return bankAccountService.bankAccountList();
@@ -40,12 +47,6 @@ public class BankAccountRestController {
             @RequestParam(name = "page",defaultValue = "0") int page,
             @RequestParam(name = "size",defaultValue = "5")int size) throws BankAccountNotFoundException {
         return bankAccountService.getAccountHistory(accountId,page,size);
-    }
-
-    @PostMapping("/accounts/{accountId}/operations")
-    public  void debiter(
-            @PathVariable String accountId,@RequestBody double amount) throws BalanceNotSufficientException, BankAccountNotFoundException {
-        bankAccountService.debit(accountId,amount,"debiter");
     }
 
 }

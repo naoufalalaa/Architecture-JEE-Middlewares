@@ -7,7 +7,7 @@ import {environment} from "../../environments/environment";
 @Injectable({
   providedIn: 'root'
 })
-export class CutomerService {
+export class CustomerService {
   constructor(private http:HttpClient) { }
 
   public getCustomers():Observable<Array<Customer>>{
