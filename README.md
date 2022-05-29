@@ -7,6 +7,8 @@ This repository will treat:
 - [x] Framework SPRING 
 - [x] Hibernate ORM JPA
 - [x] Jax Binding OXM JaxB
+- [x] Spring MVC
+- [x] Angular
 
 > You'll find a brief repport on each activity under each.
 
