@@ -9,11 +9,17 @@ import ma.enset.digitalbanking.enums.OpType;
 import ma.enset.digitalbanking.repositories.AccountOperationRepository;
 import ma.enset.digitalbanking.repositories.BankAccountRepository;
 import ma.enset.digitalbanking.repositories.CustomerRepository;
+import ma.enset.digitalbanking.security.entities.AppRole;
+import ma.enset.digitalbanking.security.entities.AppUser;
+import ma.enset.digitalbanking.security.service.SecurityService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 import java.util.UUID;
@@ -25,6 +31,7 @@ public class DigitalBankingApplication {
     public static void main(String[] args) {
         SpringApplication.run(DigitalBankingApplication.class, args);
     }
+
     //@Bean
     CommandLineRunner start(CustomerRepository customerRepository,
                             BankAccountRepository bankAccountRepository,
@@ -70,4 +77,25 @@ public class DigitalBankingApplication {
             });
         };
     }
+
+    //@Bean
+    CommandLineRunner usrs_(SecurityService securityService) {
+        return args -> {
+            securityService.addNewRole(new AppRole(null, "USER"));
+            securityService.addNewRole(new AppRole(null, "ADMIN"));
+            securityService.addNewUser(new AppUser(null, "user", "0000", new ArrayList<>()));
+            securityService.addNewUser(new AppUser(null, "admin", "1620", new ArrayList<>()));
+
+            securityService.addRoleToUser("user", "USER");
+            securityService.addRoleToUser("admin", "USER");
+            securityService.addRoleToUser("admin", "ADMIN");
+
+        };
+    }
+
+    @Bean
+    PasswordEncoder passwordEncoder(){
+        return new BCryptPasswordEncoder();
+    }
+
 }

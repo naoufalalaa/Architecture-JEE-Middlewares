@@ -14,6 +14,6 @@ public class Customer {
     private Long id;
     private String email;
     private String name;
-    @OneToMany(mappedBy = "customer")
+    @OneToMany(mappedBy = "customer", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<BankAccount> bankAccounts;
 }
