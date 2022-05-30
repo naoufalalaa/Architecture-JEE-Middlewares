@@ -89,6 +89,6 @@ dans le fichier main:
 ![Screenshot 2022-05-30 at 02 22 23](https://user-images.githubusercontent.com/61352259/170903398-ca88bbd7-cb32-4a07-a754-7658ce1a752e.png)
 
 
-
+---
 ##### Ressources : 
 JWT  :  https://github.com/ubmagh/spring-ng-digital-banking/tree/main/Backend
