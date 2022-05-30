@@ -17,6 +17,7 @@ export class SecurityService {
 
   constructor(private http: HttpClient) {
     this.access_token = localStorage.getItem("access_token") ? localStorage.getItem("access_token") + "" : "";
+    console.log("  ----------------  "+this.access_token)
     this.refresh_token = localStorage.getItem("refresh_token") ? localStorage.getItem("refresh_token") + "" : "";
   }
 
@@ -56,6 +57,7 @@ export class SecurityService {
     }).subscribe({
       next: res => {
         this.user = res;
+        console.log(" -----jdgiy --- - ----- "+res)
         this.userSubject.next(res)
       },
       error: err => {

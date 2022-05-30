@@ -26,6 +26,7 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.securityService.getUser()
     this.securityservSub$ = this.securityService.userSubject.subscribe({
       next: user=>{
         this.authenticated = user!=undefined;
@@ -36,6 +37,7 @@ export class HomeComponent implements OnInit {
     });
     console.log(this.authenticated);
   }
+
   ngOnDestroy(): void {
     this.securityservSub$?.unsubscribe();
   }
