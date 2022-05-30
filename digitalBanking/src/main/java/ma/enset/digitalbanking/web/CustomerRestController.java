@@ -1,6 +1,7 @@
 package ma.enset.digitalbanking.web;
 
 
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import ma.enset.digitalbanking.dtos.CreditDTO;
@@ -20,23 +21,21 @@ import java.util.List;
 @AllArgsConstructor
 @Slf4j
 @RequestMapping("/v1")
+@SecurityRequirement(name = "digitalBankApi")
 @CrossOrigin("*")
 public class CustomerRestController {
     private BankAccountService bankAccountService;
 
-    @PreAuthorize("hasAuthority('USER')")
     @GetMapping("/customers")
     public List<CustomerDTO> customers(){
         return bankAccountService.listCustomers();
     }
 
-    @PreAuthorize("hasAuthority('USER')")
     @GetMapping("/customers/search")
     public List<CustomerDTO> searchCustomers(@RequestParam(name = "keyword",defaultValue = "") String keyword){
         return bankAccountService.searchCustomers("%"+keyword+"%");
     }
 
-    @PreAuthorize("hasAuthority('USER')")
     @GetMapping("/customers/{id}")
     public CustomerDTO getCustomer(@PathVariable(name = "id") Long customerId) throws CustomerNotFoundException {
         return bankAccountService.getCustomer(customerId);

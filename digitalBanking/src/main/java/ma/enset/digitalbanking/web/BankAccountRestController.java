@@ -1,5 +1,6 @@
 package ma.enset.digitalbanking.web;
 
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import ma.enset.digitalbanking.dtos.AccountHistoryDTO;
@@ -18,6 +19,7 @@ import java.util.List;
 @Slf4j
 @RequestMapping("/v1")
 @CrossOrigin("*")
+@SecurityRequirement(name = "digitalBankApi")
 public class BankAccountRestController {
     private BankAccountService bankAccountService;
 

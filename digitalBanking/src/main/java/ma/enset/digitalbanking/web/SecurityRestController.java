@@ -5,6 +5,7 @@ import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import ma.enset.digitalbanking.security.config.JwtConfig;
@@ -27,10 +28,13 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 @CrossOrigin("*")
 @RequestMapping("/v1")
+@SecurityRequirement(name = "digitalBankApi")
 
 public class SecurityRestController {
 
     private SecurityService securityService;
+
+
 
     @GetMapping("/v1/refresh-token")
     public void refreshToken(HttpServletRequest request, HttpServletResponse response) throws Exception {

@@ -1,5 +1,7 @@
 package ma.enset.digitalbanking;
 
+import io.swagger.v3.oas.annotations.enums.SecuritySchemeType;
+import io.swagger.v3.oas.annotations.security.SecurityScheme;
 import ma.enset.digitalbanking.entities.AccountOperation;
 import ma.enset.digitalbanking.entities.CurrentAccount;
 import ma.enset.digitalbanking.entities.Customer;
@@ -21,11 +23,11 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Locale;
 import java.util.UUID;
 import java.util.stream.Stream;
 
 @SpringBootApplication
+@SecurityScheme(name = "digitalBankApi", description = "Digital Bank API", type = SecuritySchemeType.HTTP, scheme = "bearer", bearerFormat = "JWT")
 public class DigitalBankingApplication {
 
     public static void main(String[] args) {
