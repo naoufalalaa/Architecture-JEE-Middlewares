@@ -27,5 +27,4 @@ export interface AccountDTO {
   balance: number;
   createdAt: Date;
   accountStatus?: any;
-
 }

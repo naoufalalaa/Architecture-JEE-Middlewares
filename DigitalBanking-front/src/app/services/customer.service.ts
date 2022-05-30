@@ -11,15 +11,15 @@ export class CustomerService {
   constructor(private http:HttpClient) { }
 
   public getCustomers():Observable<Array<Customer>>{
-    return this.http.get<Array<Customer>>(environment.backendHost+"/customers");
+    return this.http.get<Array<Customer>>(environment.backendHost+"/v1/customers");
   }
   public searchCustomers(keyword:string):Observable<Array<Customer>>{
-    return this.http.get<Array<Customer>>(environment.backendHost+"/customers/search?keyword="+keyword);
+    return this.http.get<Array<Customer>>(environment.backendHost+"/v1/customers/search?keyword="+keyword);
   }
   public saveCustomers(customer:Customer):Observable<Customer>{
-    return this.http.post<Customer>(environment.backendHost+"/customers",customer);
+    return this.http.post<Customer>(environment.backendHost+"/v1/customers",customer);
   }
   public deleteCustomer(id:number){
-    return this.http.delete(environment.backendHost+"/customers/"+id);
+    return this.http.delete(environment.backendHost+"/v1/customers/"+id);
   }
 }

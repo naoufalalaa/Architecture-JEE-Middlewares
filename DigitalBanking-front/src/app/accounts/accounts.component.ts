@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup} from "@angular/forms";
-import {AccountHistory} from "../model/account.model";
+import {AccountDTO, AccountHistory} from "../model/account.model";
 import {AccountService} from "../services/account.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {catchError, Observable, throwError} from "rxjs";
@@ -18,13 +18,18 @@ export class AccountsComponent implements OnInit {
   errorMessage! :string;
   accounts!: Observable<AccountHistory>;
   accountId: number=0;
+  accountInfo!: AccountDTO  ;
 
   constructor(private fb:FormBuilder,private accountService:AccountService,private route:ActivatedRoute,private router:Router) { }
 
   ngOnInit(): void {
     this.accountId=this.route.snapshot.params["id"];
-    console.log("accountId: "+this.accountId);
 
+    this.accountService.getAccountInfo(String(this.accountId)).subscribe(
+      data => {
+        this.accountInfo = data;
+      }
+    );
 
     this.accountFormGroup=this.fb.group({
       accountId:this.fb.control(this.accountId)
@@ -39,7 +44,6 @@ export class AccountsComponent implements OnInit {
     if (this.accountId!=0)
     {
       this.handleSearchAccount();
-
     }
 
   }
@@ -68,14 +72,12 @@ export class AccountsComponent implements OnInit {
     {
       this.accountService.debit(accountId,amount,description).subscribe( {
           next:(data)=>{
-            alert("debit success")
             this.operationFormGroup.reset();
-
             this.handleSearchAccount();
-
+            alert("debit success")
           },
           error:(err => {
-            alert("debit not functioning properly")
+            alert(err)
           })
         }
 
@@ -84,14 +86,12 @@ export class AccountsComponent implements OnInit {
     else  if (operationType=="CREDIT"){
       this.accountService.credit(accountId,amount,description).subscribe( {
           next:(data)=>{
-            alert("credit success")
             this.operationFormGroup.reset();
-
             this.handleSearchAccount();
-
+            alert("credit success")
           },
           error:(err => {
-            alert("credit not functioning properly")
+            alert(err)
           })
         }
 
@@ -101,14 +101,12 @@ export class AccountsComponent implements OnInit {
       console.log(accountId+" "+accountDestination)
       this.accountService.transfer(accountId,accountDestination,amount).subscribe( {
           next:(data)=>{
-            alert("transfer success")
             this.operationFormGroup.reset();
-
             this.handleSearchAccount();
-
+            alert("transfer success")
           },
           error:(err => {
-            alert("transfer not functioning properly")
+            alert(err)
           })
         }
 

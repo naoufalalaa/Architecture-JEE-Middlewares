@@ -11,15 +11,18 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import { FormCustomerComponent } from './form-customer/form-customer.component';
 import { CustomerAccountsComponent } from './customer-accounts/customer-accounts.component';
 import { AccountsComponent } from './accounts/accounts.component';
+import { LoginComponent } from './login/login.component';
+import {TokenInterceptorProvider} from "./interceptors/tokenInterceptor";
 
 @NgModule({
   declarations: [
     AppComponent,
+    LoginComponent,
     CustomerComponent,
     HomeComponent,
     FormCustomerComponent,
     CustomerAccountsComponent,
-    AccountsComponent
+    AccountsComponent,
   ],
   imports: [
     BrowserModule,
@@ -27,7 +30,7 @@ import { AccountsComponent } from './accounts/accounts.component';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

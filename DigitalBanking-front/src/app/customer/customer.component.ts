@@ -1,10 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {CustomerService} from "../services/customer.service";
-import {catchError, map, Observable, throwError} from "rxjs";
+import {catchError, map, Observable, Subscription, throwError} from "rxjs";
 import {Customer} from "../model/customer.model";
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {Router} from "@angular/router";
+import {SecurityService} from "../services/security.service";
 
 @Component({
   selector: 'app-customer',
@@ -15,11 +16,20 @@ export class CustomerComponent implements OnInit {
   customers!: Observable<Array<Customer>>;
   errorMessage! :string;
   searchFormGroup: FormGroup | undefined;
+  userIsAdmin=false;
+  userSub$ ?: Subscription
 
-  constructor(private customerService: CustomerService,private fb:FormBuilder,private router:Router) {
+  constructor(private customerService: CustomerService,private fb:FormBuilder,private router:Router,private securityService: SecurityService) {
+    this.userIsAdmin = securityService.user?.roles.find(e=>e.roleName=='ADMIN')!=undefined;
+    this.userSub$ = this.securityService.userSubject.subscribe({
+      next: user=>{
+        this.userIsAdmin = user?.roles.find(e=>e.roleName=='ADMIN')!=undefined;
+      }
+    })
   }
 
   ngOnInit(): void {
+    this.userIsAdmin = this.securityService.user?.roles.find(e=>e.roleName=='ADMIN')!=undefined;
     this.searchFormGroup=this.fb.group({
       keyword: this.fb.control("")
     });
@@ -28,6 +38,7 @@ export class CustomerComponent implements OnInit {
     console.log(this.customerService.getCustomers().subscribe(customers=>{
       console.log(customers);
     }));
+
   }
   handleSearchCustomers(){
     let kw=this.searchFormGroup?.value.keyword;
@@ -63,5 +74,9 @@ export class CustomerComponent implements OnInit {
   handleCustomerAccounts(customer:Customer) {
     this.router.navigateByUrl("/customer-accounts/"+customer.id,{state:customer})
 
+  }
+
+  ngOnDestroy(): void {
+    this.userSub$?.unsubscribe();
   }
 }
