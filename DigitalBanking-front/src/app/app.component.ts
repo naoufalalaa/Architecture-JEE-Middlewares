@@ -28,6 +28,8 @@ export class AppComponent {
     })
   }
   ngOnInit(): void {
+    this.securityService.getUser()
+
     this.user = this.securityService.user;
     this.userRole = this.securityService.user?.roles.find(e=>e.roleName=="ADMIN")!=undefined?"ADMIN":"USER";
   }
