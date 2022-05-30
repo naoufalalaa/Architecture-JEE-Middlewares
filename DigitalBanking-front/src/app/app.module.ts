@@ -32,7 +32,9 @@ import {TokenInterceptorProvider} from "./interceptors/tokenInterceptor";
     ReactiveFormsModule,
     BrowserAnimationsModule,
   ],
-  providers: [],
+  providers: [
+    TokenInterceptorProvider
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
